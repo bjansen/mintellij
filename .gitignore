@@ -1,0 +1,4 @@
+/build/
+/.gradle/
+/.idea/
+/src/test/resources/ParserTests/.idea/

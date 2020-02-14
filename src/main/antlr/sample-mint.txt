@@ -1,0 +1,36 @@
+/* a comment */
+module Foo.Bar {
+    fun string(): Html {
+        "foo bra
+
+        \\b\" "
+    }
+    fun record(): Html {
+        {
+          email = "john.doe@gmail.com",
+          name = "John Doe",
+          id = 0
+        }
+    }
+    fun recordUpdate(): Html {
+        { user | name = "Stuart" }
+    }
+    fun ddecode(): Html {
+        decode "foo" as Foo
+    }
+    fun enncode(): Html {
+        encode "foo"
+    }
+    fun iff(): Html {
+        if ("yep") {
+            "nope"
+        } else {
+            23
+        }
+    }
+    fun forr(): Html {
+        for (a, b, c of [1]) {
+            2
+        }
+    }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "ParserTests",
+  "source-directories": [
+    "source"
+  ],
+  "test-directories": [
+    "tests"
+  ]
+}

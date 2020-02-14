@@ -1,0 +1,25 @@
+<idea-plugin>
+    <id>com.github.bjansen.mintellij</id>
+    <name>Mint</name>
+    <vendor email="bastien.jansen@gmx.com" url="https://github.com/bjansen">Bastien Jansen</vendor>
+
+    <description><![CDATA[
+        Adds support for the <a href="https://www.mint-lang.com">Mint programming language</a>.
+    ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <fileType language="Mint" name="Mint File" extensions="mint" fieldName="INSTANCE"
+                  implementationClass="com.github.bjansen.mintellij.lang.MintFileType"/>
+        <lang.parserDefinition language="Mint"
+                               implementationClass="com.github.bjansen.mintellij.psi.MintParserDefinition"/>
+        <lang.syntaxHighlighter language="Mint"
+                                implementationClass="com.github.bjansen.mintellij.lang.MintSyntaxHighlighter"/>
+        <lang.commenter language="Mint" implementationClass="com.github.bjansen.mintellij.lang.MintCommenter"/>
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+    </actions>
+</idea-plugin>
