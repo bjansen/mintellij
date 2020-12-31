@@ -23,6 +23,7 @@ public class MintSyntaxHighlighter extends SyntaxHighlighterBase {
 			getTokenType(MintLexer.Catch),
 			getTokenType(MintLexer.Component),
 			getTokenType(MintLexer.Connect),
+			getTokenType(MintLexer.Const),
 			getTokenType(MintLexer.Decode),
 			getTokenType(MintLexer.Else),
 			getTokenType(MintLexer.Encode),
@@ -38,9 +39,12 @@ public class MintSyntaxHighlighter extends SyntaxHighlighterBase {
 			getTokenType(MintLexer.Of),
 			getTokenType(MintLexer.Parallel),
 			getTokenType(MintLexer.Property),
+			getTokenType(MintLexer.Provider),
 			getTokenType(MintLexer.Record),
+			getTokenType(MintLexer.Routes),
 			getTokenType(MintLexer.Sequence),
 			getTokenType(MintLexer.State),
+			getTokenType(MintLexer.Style),
 			getTokenType(MintLexer.Then),
 			getTokenType(MintLexer.Try),
 			getTokenType(MintLexer.Use),
@@ -58,6 +62,9 @@ public class MintSyntaxHighlighter extends SyntaxHighlighterBase {
 	private static final TextAttributesKey TYPE =
 			createTextAttributesKey("MintType", DefaultLanguageHighlighterColors.INSTANCE_FIELD);
 
+	private static final TextAttributesKey STRING =
+			createTextAttributesKey("MintString", DefaultLanguageHighlighterColors.STRING);
+
 	@NotNull
 	@Override
 	public Lexer getHighlightingLexer() {
@@ -73,6 +80,8 @@ public class MintSyntaxHighlighter extends SyntaxHighlighterBase {
 			return pack(COMMENT);
 		} else if (tokenType.equals(getTokenType(MintLexer.TypeId))) {
 			return pack(TYPE);
+		} else if (tokenType.equals(getTokenType(MintLexer.StringLiteral))) {
+			return pack(STRING);
 		}
 
 		return new TextAttributesKey[0];

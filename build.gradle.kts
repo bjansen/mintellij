@@ -1,5 +1,5 @@
 plugins {
-    id("org.jetbrains.intellij") version "0.4.16"
+    id("org.jetbrains.intellij") version "0.6.5"
     antlr
 }
 
@@ -22,11 +22,13 @@ tasks.getByName<org.jetbrains.intellij.tasks.PatchPluginXmlTask>("patchPluginXml
     changeNotes("""
       Add change notes here.<br>
       <em>most HTML tags may be used</em>""")
+    sinceBuild("192")
+    untilBuild(null)
 }
 
 dependencies {
-    antlr("org.antlr:antlr4:4.8-1")
-    implementation("org.antlr:antlr4-runtime:4.8-1")
+    antlr("org.antlr:antlr4:4.9")
+    implementation("org.antlr:antlr4-runtime:4.9")
     implementation("org.antlr", "antlr4-intellij-adaptor", "0.1")
     testImplementation("junit:junit:4.+")
 }

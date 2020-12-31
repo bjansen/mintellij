@@ -6,7 +6,7 @@ Comment: '/*' .*? '*/' -> channel(HIDDEN);
 JsStart: '`' -> pushMode(IN_JS);
 
 // TODO interpolation,
-StringLiteral: StringPart WS? ('\\' WS? StringPart)?;
+StringLiteral: StringPart (WS? '\\' WS? StringPart)*;
 BoolLiteral: 'true' | 'false';
 NumberLiteral: '-'? Digit+ ('.' Digit+)?;
 
@@ -38,6 +38,7 @@ Not: '!';
 
 SafeAccess: '&.';
 SafeCall: '&(';
+TripleDot: '...';
 Dot: '.';
 LBrace: '{';
 RBrace: '}';
@@ -59,6 +60,7 @@ Case: 'case';
 Catch: 'catch';
 Component: 'component';
 Connect: 'connect';
+Const: 'const';
 Decode: 'decode';
 Else: 'else';
 Encode: 'encode';
@@ -86,12 +88,14 @@ Test: 'test';
 Then: 'then';
 Try: 'try';
 Use: 'use';
+Using: 'using';
 Void: 'void';
 When: 'when';
 Where: 'where';
 With: 'with';
 
 Env: '@' [A-Z]+;
+ConstId: [A-Z][A-Z0-9_]*;
 TypeId: [A-Z][a-zA-Z0-9]*;
 Variable: [a-z][a-zA-Z0-9]*;
 VariableWithDashes: [a-z-][a-zA-Z0-9-]*;

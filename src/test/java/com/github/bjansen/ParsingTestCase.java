@@ -2,23 +2,24 @@ package com.github.bjansen;
 
 import com.github.bjansen.mintellij.MintLexer;
 import com.github.bjansen.mintellij.MintParser;
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
 import junit.framework.TestCase;
 import org.antlr.intellij.adaptor.parser.SyntaxError;
 import org.antlr.intellij.adaptor.parser.SyntaxErrorListener;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
+import org.junit.Ignore;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
-
+@Ignore
 public class ParsingTestCase extends TestCase {
 
 	private final File mintFile;
 
-	public ParsingTestCase(File mintFile) {
-		super(mintFile.getName());
+	public ParsingTestCase(File mintFile, String name) {
+		super(name);
 		this.mintFile = mintFile;
 	}
 
