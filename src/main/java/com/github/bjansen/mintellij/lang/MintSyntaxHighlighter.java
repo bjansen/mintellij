@@ -82,37 +82,37 @@ public class MintSyntaxHighlighter extends SyntaxHighlighterBase {
 			getTokenType(MintLexer.Hash)
 	);
 
-	private static final TextAttributesKey KEYWORD =
+	static final TextAttributesKey KEYWORD =
 			createTextAttributesKey("MintKeyword", DefaultLanguageHighlighterColors.KEYWORD);
 
-	private static final TextAttributesKey COMMENT =
+	static final TextAttributesKey COMMENT =
 			createTextAttributesKey("MintComment", DefaultLanguageHighlighterColors.DOC_COMMENT);
 
-	private static final TextAttributesKey TYPE =
+	static final TextAttributesKey TYPE =
 			createTextAttributesKey("MintType", DefaultLanguageHighlighterColors.INSTANCE_FIELD);
 
-	private static final TextAttributesKey STRING =
+	static final TextAttributesKey STRING =
 			createTextAttributesKey("MintString", DefaultLanguageHighlighterColors.STRING);
 
-	private static final TextAttributesKey OPERATOR =
+	static final TextAttributesKey OPERATOR =
 			createTextAttributesKey("MintOperator", DefaultLanguageHighlighterColors.OPERATION_SIGN);
 
-	private static final TextAttributesKey BRACE =
+	static final TextAttributesKey BRACE =
 			createTextAttributesKey("MintBrace", DefaultLanguageHighlighterColors.BRACES);
 
-	private static final TextAttributesKey PAREN =
+	static final TextAttributesKey PAREN =
 			createTextAttributesKey("MintParen", DefaultLanguageHighlighterColors.PARENTHESES);
 
-	private static final TextAttributesKey BRACKET =
+	static final TextAttributesKey BRACKET =
 			createTextAttributesKey("MintBracket", DefaultLanguageHighlighterColors.BRACKETS);
 
-	private static final TextAttributesKey DOT =
+	static final TextAttributesKey DOT =
 			createTextAttributesKey("MintDot", DefaultLanguageHighlighterColors.DOT);
 
-	private static final TextAttributesKey SEMICOLON =
+	static final TextAttributesKey SEMICOLON =
 			createTextAttributesKey("MintSemi", DefaultLanguageHighlighterColors.SEMICOLON);
 
-	private static final TextAttributesKey NUMBER =
+	static final TextAttributesKey NUMBER =
 			createTextAttributesKey("MintNumber", DefaultLanguageHighlighterColors.NUMBER);
 
 	@NotNull
