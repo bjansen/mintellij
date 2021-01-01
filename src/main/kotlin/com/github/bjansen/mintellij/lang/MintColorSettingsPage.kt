@@ -1,95 +1,74 @@
-package com.github.bjansen.mintellij.lang;
+package com.github.bjansen.mintellij.lang
 
-import com.intellij.openapi.editor.colors.TextAttributesKey;
-import com.intellij.openapi.fileTypes.SyntaxHighlighter;
-import com.intellij.openapi.options.colors.AttributesDescriptor;
-import com.intellij.openapi.options.colors.ColorDescriptor;
-import com.intellij.openapi.options.colors.ColorSettingsPage;
-import com.intellij.openapi.util.IconLoader;
-import java.util.Map;
-import javax.swing.Icon;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import com.intellij.openapi.editor.colors.TextAttributesKey
+import com.intellij.openapi.options.colors.AttributesDescriptor
+import com.intellij.openapi.options.colors.ColorDescriptor
+import com.intellij.openapi.options.colors.ColorSettingsPage
+import com.intellij.openapi.util.IconLoader
+import org.jetbrains.annotations.NonNls
 
-public class MintColorSettingsPage implements ColorSettingsPage {
+class MintColorSettingsPage : ColorSettingsPage {
 
-    private static final AttributesDescriptor[] DESCRIPTORS = new AttributesDescriptor[]{
-        new AttributesDescriptor("Keyword", MintSyntaxHighlighter.KEYWORD),
-        new AttributesDescriptor("Comment", MintSyntaxHighlighter.COMMENT),
-        new AttributesDescriptor("Type", MintSyntaxHighlighter.TYPE),
-        new AttributesDescriptor("String", MintSyntaxHighlighter.STRING),
-        new AttributesDescriptor("Number", MintSyntaxHighlighter.NUMBER),
-        new AttributesDescriptor("Braces and Operators//Operator", MintSyntaxHighlighter.OPERATOR),
-        new AttributesDescriptor("Braces and Operators//Brace", MintSyntaxHighlighter.BRACE),
-        new AttributesDescriptor("Braces and Operators//Paren", MintSyntaxHighlighter.PAREN),
-        new AttributesDescriptor("Braces and Operators//Bracket", MintSyntaxHighlighter.BRACKET),
-        new AttributesDescriptor("Braces and Operators//Dot", MintSyntaxHighlighter.DOT),
-        new AttributesDescriptor("Braces and Operators//Semicolon", MintSyntaxHighlighter.SEMICOLON),
-    };
+	override fun getIcon() = IconLoader.getIcon("/mint/icons/logo.svg")
 
-    @Override
-    public @Nullable Icon getIcon() {
-        return IconLoader.getIcon("/mint/icons/logo.svg");
-    }
+	override fun getHighlighter() = MintSyntaxHighlighter()
 
-    @Override
-    public @NotNull SyntaxHighlighter getHighlighter() {
-        return new MintSyntaxHighlighter();
-    }
+	@NonNls
+	override fun getDemoText(): String {
+		return """
+            /*
+             * Mint demo
+             */
+            component Counter {
+              state counter = 0
+            
+              fun increment {
+                next { counter = counter + 1 }
+              }
+            
+              fun decrement {
+                next { counter = counter - 1 }
+              }
+            
+              fun render {
+                <div>
+                  <button onClick={decrement}>
+                    "Decrement"
+                  </button>
+            
+                  <span>
+                    <{ Number.toString(counter) }>
+                  </span>
+            
+                  <button onClick={increment}>
+                    "Increment"
+                  </button>
+                </div>
+              }
+            }"""
+	}
 
-    @Override
-    public @NonNls
-    @NotNull String getDemoText() {
-        return "/*\n"
-            + " * Mint demo\n"
-            + " */\n"
-            + "component Counter {\n"
-            + "  state counter = 0\n"
-            + "\n"
-            + "  fun increment {\n"
-            + "    next { counter = counter + 1 }\n"
-            + "  }\n"
-            + "\n"
-            + "  fun decrement {\n"
-            + "    next { counter = counter - 1 }\n"
-            + "  }\n"
-            + "\n"
-            + "  fun render {\n"
-            + "    <div>\n"
-            + "      <button onClick={decrement}>\n"
-            + "        \"Decrement\"\n"
-            + "      </button>\n"
-            + "\n"
-            + "      <span>\n"
-            + "        <{ Number.toString(counter) }>\n"
-            + "      </span>\n"
-            + "\n"
-            + "      <button onClick={increment}>\n"
-            + "        \"Increment\"\n"
-            + "      </button>\n"
-            + "    </div>\n"
-            + "  }\n"
-            + "}";
-    }
+	override fun getAdditionalHighlightingTagToDescriptorMap(): Map<String, TextAttributesKey>? = null
 
-    @Override
-    public @Nullable Map<String, TextAttributesKey> getAdditionalHighlightingTagToDescriptorMap() {
-        return null;
-    }
+	override fun getAttributeDescriptors() = DESCRIPTORS
 
-    @Override
-    public AttributesDescriptor @NotNull [] getAttributeDescriptors() {
-        return DESCRIPTORS;
-    }
+	override fun getColorDescriptors(): Array<ColorDescriptor> = ColorDescriptor.EMPTY_ARRAY
 
-    @Override
-    public ColorDescriptor @NotNull [] getColorDescriptors() {
-        return ColorDescriptor.EMPTY_ARRAY;
-    }
+	override fun getDisplayName() = "Mint"
 
-    @Override
-    public @NotNull String getDisplayName() {
-        return "Mint";
-    }
+	companion object {
+		private val DESCRIPTORS = arrayOf(
+				AttributesDescriptor("Keyword", MintSyntaxHighlighter.KEYWORD),
+				AttributesDescriptor("Comment", MintSyntaxHighlighter.COMMENT),
+				AttributesDescriptor("Type", MintSyntaxHighlighter.TYPE),
+				AttributesDescriptor("String", MintSyntaxHighlighter.STRING),
+				AttributesDescriptor("Number", MintSyntaxHighlighter.NUMBER),
+				AttributesDescriptor("Braces and Operators//Operator", MintSyntaxHighlighter.OPERATOR),
+				AttributesDescriptor("Braces and Operators//Brace", MintSyntaxHighlighter.BRACE),
+				AttributesDescriptor("Braces and Operators//Paren", MintSyntaxHighlighter.PAREN),
+				AttributesDescriptor("Braces and Operators//Bracket", MintSyntaxHighlighter.BRACKET),
+				AttributesDescriptor("Braces and Operators//Dot", MintSyntaxHighlighter.DOT),
+				AttributesDescriptor("Braces and Operators//Semicolon", MintSyntaxHighlighter.SEMICOLON)
+		)
+	}
 }

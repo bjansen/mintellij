@@ -1,21 +1,11 @@
-package com.github.bjansen.mintellij.psi;
+package com.github.bjansen.mintellij.psi
 
-import com.github.bjansen.mintellij.lang.MintFileType;
-import com.github.bjansen.mintellij.lang.MintLanguage;
-import com.intellij.extapi.psi.PsiFileBase;
-import com.intellij.openapi.fileTypes.FileType;
-import com.intellij.psi.FileViewProvider;
-import org.jetbrains.annotations.NotNull;
+import com.github.bjansen.mintellij.lang.MintFileType
+import com.github.bjansen.mintellij.lang.MintLanguage
+import com.intellij.extapi.psi.PsiFileBase
+import com.intellij.psi.FileViewProvider
 
-public class MintFile extends PsiFileBase {
+class MintFile(viewProvider: FileViewProvider) : PsiFileBase(viewProvider, MintLanguage) {
 
-	protected MintFile(@NotNull FileViewProvider viewProvider) {
-		super(viewProvider, MintLanguage.INSTANCE);
-	}
-
-	@NotNull
-	@Override
-	public FileType getFileType() {
-		return MintFileType.INSTANCE;
-	}
+	override fun getFileType() = MintFileType
 }

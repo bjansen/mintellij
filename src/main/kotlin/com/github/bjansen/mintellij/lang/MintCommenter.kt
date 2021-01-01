@@ -1,36 +1,15 @@
-package com.github.bjansen.mintellij.lang;
+package com.github.bjansen.mintellij.lang
 
-import com.intellij.lang.Commenter;
-import org.jetbrains.annotations.Nullable;
+import com.intellij.lang.Commenter
 
-public class MintCommenter implements Commenter {
-	@Nullable
-	@Override
-	public String getLineCommentPrefix() {
-		return null;
-	}
+class MintCommenter : Commenter {
+	override fun getLineCommentPrefix(): String? = null
 
-	@Nullable
-	@Override
-	public String getBlockCommentPrefix() {
-		return "/*";
-	}
+	override fun getBlockCommentPrefix() = "/*"
 
-	@Nullable
-	@Override
-	public String getBlockCommentSuffix() {
-		return "*/";
-	}
+	override fun getBlockCommentSuffix() = "*/"
 
-	@Nullable
-	@Override
-	public String getCommentedBlockCommentPrefix() {
-		return null;
-	}
+	override fun getCommentedBlockCommentPrefix(): String? = null
 
-	@Nullable
-	@Override
-	public String getCommentedBlockCommentSuffix() {
-		return null;
-	}
+	override fun getCommentedBlockCommentSuffix(): String? = null
 }

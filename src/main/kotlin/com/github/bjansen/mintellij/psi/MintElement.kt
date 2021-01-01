@@ -1,12 +1,6 @@
-package com.github.bjansen.mintellij.psi;
+package com.github.bjansen.mintellij.psi
 
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
-import com.intellij.lang.ASTNode;
-import org.jetbrains.annotations.NotNull;
+import com.intellij.extapi.psi.ASTWrapperPsiElement
+import com.intellij.lang.ASTNode
 
-public class MintElement extends ASTWrapperPsiElement {
-
-	public MintElement(@NotNull ASTNode node) {
-		super(node);
-	}
-}
+class MintElement(node: ASTNode) : ASTWrapperPsiElement(node)

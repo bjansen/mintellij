@@ -1,42 +1,14 @@
-package com.github.bjansen.mintellij.lang;
+package com.github.bjansen.mintellij.lang
 
-import com.intellij.openapi.fileTypes.LanguageFileType;
-import com.intellij.openapi.util.IconLoader;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import com.intellij.openapi.fileTypes.LanguageFileType
+import com.intellij.openapi.util.IconLoader
 
-import javax.swing.*;
+object MintFileType : LanguageFileType(MintLanguage) {
+	override fun getName() = "Mint File"
 
-public class MintFileType extends LanguageFileType {
+	override fun getDescription() = "Mint"
 
-	public static final MintFileType INSTANCE = new MintFileType();
+	override fun getDefaultExtension() = "mint"
 
-	private MintFileType() {
-		super(MintLanguage.INSTANCE);
-	}
-
-	@NotNull
-	@Override
-	public String getName() {
-		return "Mint File";
-	}
-
-	@NotNull
-	@Override
-	public String getDescription() {
-		return "Mint";
-	}
-
-	@NotNull
-	@Override
-	public String getDefaultExtension() {
-		return "mint";
-	}
-
-	@Nullable
-	@Override
-	public Icon getIcon() {
-		return IconLoader
-				.getIcon("/mint/icons/logo.svg");
-	}
+	override fun getIcon() = IconLoader.getIcon("/mint/icons/logo.svg")
 }

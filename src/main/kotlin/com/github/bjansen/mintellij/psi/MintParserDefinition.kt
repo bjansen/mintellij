@@ -1,90 +1,81 @@
-package com.github.bjansen.mintellij.psi;
+package com.github.bjansen.mintellij.psi
 
-import com.github.bjansen.mintellij.MintLexer;
-import com.github.bjansen.mintellij.MintParser;
-import com.github.bjansen.mintellij.lang.MintLanguage;
-import com.intellij.lang.ASTNode;
-import com.intellij.lang.ParserDefinition;
-import com.intellij.lang.PsiParser;
-import com.intellij.lexer.Lexer;
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.FileViewProvider;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.IFileElementType;
-import com.intellij.psi.tree.TokenSet;
-import org.antlr.intellij.adaptor.lexer.ANTLRLexerAdaptor;
-import org.antlr.intellij.adaptor.lexer.PSIElementTypeFactory;
-import org.antlr.intellij.adaptor.parser.ANTLRParserAdaptor;
-import org.antlr.v4.runtime.Parser;
-import org.antlr.v4.runtime.tree.ParseTree;
-import org.intellij.lang.annotations.MagicConstant;
-import org.jetbrains.annotations.NotNull;
+import com.github.bjansen.mintellij.MintLexer
+import com.github.bjansen.mintellij.MintParser
+import com.github.bjansen.mintellij.lang.MintLanguage
+import com.intellij.lang.ASTNode
+import com.intellij.lang.ParserDefinition
+import com.intellij.lang.PsiParser
+import com.intellij.lexer.Lexer
+import com.intellij.openapi.project.Project
+import com.intellij.psi.FileViewProvider
+import com.intellij.psi.PsiElement
+import com.intellij.psi.PsiFile
+import com.intellij.psi.tree.IElementType
+import com.intellij.psi.tree.IFileElementType
+import com.intellij.psi.tree.TokenSet
+import org.antlr.intellij.adaptor.lexer.ANTLRLexerAdaptor
+import org.antlr.intellij.adaptor.lexer.PSIElementTypeFactory
+import org.antlr.intellij.adaptor.parser.ANTLRParserAdaptor
+import org.antlr.v4.runtime.Parser
+import org.antlr.v4.runtime.tree.ParseTree
+import org.intellij.lang.annotations.MagicConstant
 
-public class MintParserDefinition implements ParserDefinition {
+class MintParserDefinition : ParserDefinition {
 
-	private static final IFileElementType FILE = new IFileElementType(MintLanguage.INSTANCE);
+	override fun createLexer(project: Project): Lexer {
+		val delegate = MintLexer(null)
 
-	static {
-		PSIElementTypeFactory.defineLanguageIElementTypes(MintLanguage.INSTANCE,
-				MintLexer.tokenNames, MintParser.ruleNames);
+		return ANTLRLexerAdaptor(MintLanguage, delegate)
 	}
 
-	@NotNull
-	@Override
-	public Lexer createLexer(Project project) {
-		final MintLexer delegate = new MintLexer(null);
-		return new ANTLRLexerAdaptor(MintLanguage.INSTANCE, delegate);
-	}
+	override fun createParser(project: Project): PsiParser {
+		val delegate = MintParser(null)
 
-	@Override
-	public PsiParser createParser(Project project) {
-		final MintParser delegate = new MintParser(null);
-		return new ANTLRParserAdaptor(MintLanguage.INSTANCE, delegate) {
-			@Override
-			protected ParseTree parse(Parser parser, IElementType root) {
-				return ((MintParser) parser).topLevel();
+		return object : ANTLRParserAdaptor(MintLanguage, delegate) {
+			override fun parse(parser: Parser, root: IElementType): ParseTree {
+				return (parser as MintParser).topLevel()
 			}
-		};
+		}
 	}
 
-	@Override
-	public IFileElementType getFileNodeType() {
-		return FILE;
+	override fun getFileNodeType(): IFileElementType {
+		return FILE
 	}
 
-	@NotNull
-	@Override
-	public TokenSet getCommentTokens() {
-		return PSIElementTypeFactory.createTokenSet(MintLanguage.INSTANCE, MintLexer.Comment);
+	override fun getCommentTokens(): TokenSet {
+		return PSIElementTypeFactory.createTokenSet(MintLanguage, MintLexer.Comment)
 	}
 
-	@NotNull
-	@Override
-	public TokenSet getStringLiteralElements() {
-		return PSIElementTypeFactory.createTokenSet(MintLanguage.INSTANCE, MintLexer.StringLiteral);
+	override fun getStringLiteralElements(): TokenSet {
+		return PSIElementTypeFactory.createTokenSet(MintLanguage, MintLexer.StringLiteral)
 	}
 
-	@NotNull
-	@Override
-	public TokenSet getWhitespaceTokens() {
-		return PSIElementTypeFactory.createTokenSet(MintLanguage.INSTANCE, MintLexer.WS);
+	override fun getWhitespaceTokens(): TokenSet {
+		return PSIElementTypeFactory.createTokenSet(MintLanguage, MintLexer.WS)
 	}
 
-	@NotNull
-	@Override
-	public PsiElement createElement(ASTNode node) {
-		return new MintElement(node);
+	override fun createElement(node: ASTNode): PsiElement {
+		return MintElement(node)
 	}
 
-	@Override
-	public PsiFile createFile(FileViewProvider viewProvider) {
-		return new MintFile(viewProvider);
+	override fun createFile(viewProvider: FileViewProvider): PsiFile {
+		return MintFile(viewProvider)
 	}
 
-	public static IElementType getTokenType(@MagicConstant(valuesFromClass = MintLexer.class) int rule) {
-		return PSIElementTypeFactory.getTokenIElementTypes(MintLanguage.INSTANCE)
-				.get(rule);
+	companion object {
+		private val FILE = IFileElementType(MintLanguage)
+
+		fun getTokenType(@MagicConstant(valuesFromClass = MintLexer::class) rule: Int): IElementType {
+			return PSIElementTypeFactory.getTokenIElementTypes(MintLanguage)[rule]
+		}
+
+		init {
+			PSIElementTypeFactory.defineLanguageIElementTypes(
+					MintLanguage,
+					MintLexer.tokenNames,
+					MintParser.ruleNames
+			)
+		}
 	}
 }

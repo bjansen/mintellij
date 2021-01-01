@@ -1,40 +1,37 @@
-package com.github.bjansen.mintellij.lang;
+package com.github.bjansen.mintellij.lang
 
-import static com.github.bjansen.mintellij.psi.MintParserDefinition.getTokenType;
+import com.github.bjansen.mintellij.MintLexer
+import com.github.bjansen.mintellij.psi.MintParserDefinition
+import com.intellij.lang.BracePair
+import com.intellij.lang.PairedBraceMatcher
+import com.intellij.psi.PsiFile
+import com.intellij.psi.tree.IElementType
 
-import com.github.bjansen.mintellij.MintLexer;
-import com.intellij.lang.BracePair;
-import com.intellij.lang.PairedBraceMatcher;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.tree.IElementType;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+class MintBraceMatcher : PairedBraceMatcher {
 
-public class MintBraceMatcher implements PairedBraceMatcher {
+	override fun getPairs() = PAIRS
 
-    private static final BracePair[] PAIRS = new BracePair[] {
-        newPair(MintLexer.LBrace, MintLexer.RBrace),
-        newPair(MintLexer.LBracket, MintLexer.RBracket),
-        newPair(MintLexer.LParen, MintLexer.RParen),
-    };
+	override fun isPairedBracesAllowedBeforeType(
+			lbraceType: IElementType,
+			contextType: IElementType?
+	) = true
 
-    private static BracePair newPair(int left, int right) {
-        return new BracePair(getTokenType(left), getTokenType(right), false);
-    }
+	override fun getCodeConstructStart(file: PsiFile, openingBraceOffset: Int) =
+			openingBraceOffset
 
-    @Override
-    public BracePair @NotNull [] getPairs() {
-        return PAIRS;
-    }
+	companion object {
+		private val PAIRS = arrayOf(
+				newPair(MintLexer.LBrace, MintLexer.RBrace),
+				newPair(MintLexer.LBracket, MintLexer.RBracket),
+				newPair(MintLexer.LParen, MintLexer.RParen)
+		)
 
-    @Override
-    public boolean isPairedBracesAllowedBeforeType(@NotNull IElementType lbraceType,
-        @Nullable IElementType contextType) {
-        return true;
-    }
-
-    @Override
-    public int getCodeConstructStart(PsiFile file, int openingBraceOffset) {
-        return openingBraceOffset;
-    }
+		private fun newPair(left: Int, right: Int): BracePair {
+			return BracePair(
+					MintParserDefinition.getTokenType(left),
+					MintParserDefinition.getTokenType(right),
+					false
+			)
+		}
+	}
 }
