@@ -17,6 +17,8 @@
         <lang.syntaxHighlighter language="Mint"
                                 implementationClass="com.github.bjansen.mintellij.lang.MintSyntaxHighlighter"/>
         <lang.commenter language="Mint" implementationClass="com.github.bjansen.mintellij.lang.MintCommenter"/>
+        <lang.braceMatcher language="Mint"
+          implementationClass="com.github.bjansen.mintellij.lang.MintBraceMatcher"/>
     </extensions>
 
     <actions>
