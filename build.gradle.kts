@@ -11,11 +11,7 @@ repositories {
 }
 
 intellij {
-    version = "IC-201-EAP-SNAPSHOT"
-}
-
-tasks.getByName<JavaExec>("runIde") {
-    systemProperty("idea.auto.reload.plugins", "")
+    version = "IC-2020.3"
 }
 
 tasks.getByName<org.jetbrains.intellij.tasks.PatchPluginXmlTask>("patchPluginXml") {
