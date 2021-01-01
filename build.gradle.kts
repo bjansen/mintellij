@@ -1,17 +1,19 @@
+val ideaVersion: String by project
+
 plugins {
     id("org.jetbrains.intellij") version "0.6.5"
     antlr
 }
 
 group = "com.github.bjansen"
-version = "1.0-SNAPSHOT"
+version = "0.1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
 }
 
 intellij {
-    version = "IC-2020.3"
+    version = ideaVersion
 }
 
 tasks.getByName<org.jetbrains.intellij.tasks.PatchPluginXmlTask>("patchPluginXml") {
