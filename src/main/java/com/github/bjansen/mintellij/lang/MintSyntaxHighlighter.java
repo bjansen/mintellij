@@ -44,13 +44,42 @@ public class MintSyntaxHighlighter extends SyntaxHighlighterBase {
 			getTokenType(MintLexer.Routes),
 			getTokenType(MintLexer.Sequence),
 			getTokenType(MintLexer.State),
+			getTokenType(MintLexer.Store),
 			getTokenType(MintLexer.Style),
+			getTokenType(MintLexer.Suite),
+			getTokenType(MintLexer.Test),
 			getTokenType(MintLexer.Then),
 			getTokenType(MintLexer.Try),
 			getTokenType(MintLexer.Use),
+			getTokenType(MintLexer.Using),
 			getTokenType(MintLexer.Void),
 			getTokenType(MintLexer.When),
+			getTokenType(MintLexer.Where),
 			getTokenType(MintLexer.With)
+	);
+
+	private static final List<IElementType> OPERATORS = Arrays.asList(
+			getTokenType(MintLexer.Compose),
+			getTokenType(MintLexer.EqEq),
+			getTokenType(MintLexer.LesserEq),
+			getTokenType(MintLexer.Lesser),
+			getTokenType(MintLexer.GreaterEq),
+			getTokenType(MintLexer.Greater),
+			getTokenType(MintLexer.Minus),
+			getTokenType(MintLexer.Plus),
+			getTokenType(MintLexer.Power),
+			getTokenType(MintLexer.Times),
+			getTokenType(MintLexer.Divided),
+			getTokenType(MintLexer.Modulo),
+			getTokenType(MintLexer.And),
+			getTokenType(MintLexer.Or),
+			getTokenType(MintLexer.NotEq),
+			getTokenType(MintLexer.DoubleColon),
+			getTokenType(MintLexer.Colon),
+			getTokenType(MintLexer.Pipe),
+			getTokenType(MintLexer.Arrow),
+			getTokenType(MintLexer.Equals),
+			getTokenType(MintLexer.Hash)
 	);
 
 	private static final TextAttributesKey KEYWORD =
@@ -65,6 +94,27 @@ public class MintSyntaxHighlighter extends SyntaxHighlighterBase {
 	private static final TextAttributesKey STRING =
 			createTextAttributesKey("MintString", DefaultLanguageHighlighterColors.STRING);
 
+	private static final TextAttributesKey OPERATOR =
+			createTextAttributesKey("MintOperator", DefaultLanguageHighlighterColors.OPERATION_SIGN);
+
+	private static final TextAttributesKey BRACE =
+			createTextAttributesKey("MintBrace", DefaultLanguageHighlighterColors.BRACES);
+
+	private static final TextAttributesKey PAREN =
+			createTextAttributesKey("MintParen", DefaultLanguageHighlighterColors.PARENTHESES);
+
+	private static final TextAttributesKey BRACKET =
+			createTextAttributesKey("MintBracket", DefaultLanguageHighlighterColors.BRACKETS);
+
+	private static final TextAttributesKey DOT =
+			createTextAttributesKey("MintDot", DefaultLanguageHighlighterColors.DOT);
+
+	private static final TextAttributesKey SEMICOLON =
+			createTextAttributesKey("MintSemi", DefaultLanguageHighlighterColors.SEMICOLON);
+
+	private static final TextAttributesKey NUMBER =
+			createTextAttributesKey("MintNumber", DefaultLanguageHighlighterColors.NUMBER);
+
 	@NotNull
 	@Override
 	public Lexer getHighlightingLexer() {
@@ -73,15 +123,37 @@ public class MintSyntaxHighlighter extends SyntaxHighlighterBase {
 
 	@NotNull
 	@Override
-	public TextAttributesKey[] getTokenHighlights(IElementType tokenType) {
-		if (KEYWORDS.contains(tokenType)) {
+	public TextAttributesKey @NotNull [] getTokenHighlights(IElementType tokenType) {
+		if (KEYWORDS.contains(tokenType)
+			|| tokenType.equals(getTokenType(MintLexer.BoolLiteral))) {
 			return pack(KEYWORD);
+		} else if (OPERATORS.contains(tokenType)) {
+			return pack(OPERATOR);
+		} else if (tokenType.equals(getTokenType(MintLexer.LBrace))
+			|| tokenType.equals(getTokenType(MintLexer.RBrace))) {
+			return pack(BRACE);
+		} else if (tokenType.equals(getTokenType(MintLexer.LParen))
+			|| tokenType.equals(getTokenType(MintLexer.SafeCall))
+			|| tokenType.equals(getTokenType(MintLexer.RParen))) {
+			return pack(PAREN);
+		} else if (tokenType.equals(getTokenType(MintLexer.LBracket))
+			|| tokenType.equals(getTokenType(MintLexer.RBracket))) {
+			return pack(BRACKET);
+		} else if (tokenType.equals(getTokenType(MintLexer.SafeAccess))
+			|| tokenType.equals(getTokenType(MintLexer.TripleDot))
+			|| tokenType.equals(getTokenType(MintLexer.Dot))) {
+			return pack(DOT);
+		} else if (tokenType.equals(getTokenType(MintLexer.Semi))) {
+			return pack(SEMICOLON);
 		} else if (tokenType.equals(getTokenType(MintLexer.Comment))) {
 			return pack(COMMENT);
 		} else if (tokenType.equals(getTokenType(MintLexer.TypeId))) {
 			return pack(TYPE);
 		} else if (tokenType.equals(getTokenType(MintLexer.StringLiteral))) {
 			return pack(STRING);
+		} else if (tokenType.equals(getTokenType(MintLexer.NumberLiteral))
+			|| tokenType.equals(getTokenType(MintLexer.Digit))) {
+			return pack(NUMBER);
 		}
 
 		return new TextAttributesKey[0];
