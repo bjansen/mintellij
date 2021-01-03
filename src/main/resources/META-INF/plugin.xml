@@ -21,6 +21,7 @@
 		<configurationType implementation="com.github.bjansen.mintellij.runConfig.MintRunConfigurationType"/>
 		<runLineMarkerContributor language="Mint" implementationClass="com.github.bjansen.mintellij.runConfig.MintLineMarkerContributor"/>
 		<runConfigurationProducer implementation="com.github.bjansen.mintellij.runConfig.MintRunConfigurationProducer"/>
+		<consoleFilterProvider implementation="com.github.bjansen.mintellij.filters.MintConsoleFilterProvider"/>
 	</extensions>
 
 	<actions>
