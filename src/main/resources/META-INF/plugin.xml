@@ -17,6 +17,8 @@
 		<lang.commenter language="Mint" implementationClass="com.github.bjansen.mintellij.lang.MintCommenter"/>
 		<lang.braceMatcher language="Mint" implementationClass="com.github.bjansen.mintellij.lang.MintBraceMatcher"/>
 		<colorSettingsPage implementation="com.github.bjansen.mintellij.lang.MintColorSettingsPage"/>
+
+		<configurationType implementation="com.github.bjansen.mintellij.runConfig.MintRunConfigurationType"/>
 	</extensions>
 
 	<actions>
