@@ -42,6 +42,6 @@ class MintRunConfigurationState : RunConfigurationOptions() {
 	@get:OptionTag(tag = "subcommand", valueAttribute = "name", nameAttribute = "")
 	var subcommand: String? by string()
 
-	@get:OptionTag(tag = "subcommand", valueAttribute = "arguments", nameAttribute = "")
+	@get:OptionTag(tag = "arguments", valueAttribute = "arguments", nameAttribute = "")
 	var arguments: String? by string()
 }

@@ -11,6 +11,8 @@ class MintRunConfigurationFactory(type: ConfigurationType) : ConfigurationFactor
 		return MintRunConfiguration(project, this, "Mint")
 	}
 
+	override fun getId() = "MintConfigurationFactory"
+
 	override fun getName() = "Mint configuration factory"
 
 }

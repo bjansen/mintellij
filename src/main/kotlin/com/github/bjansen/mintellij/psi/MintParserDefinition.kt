@@ -66,8 +66,12 @@ class MintParserDefinition : ParserDefinition {
 	companion object {
 		private val FILE = IFileElementType(MintLanguage)
 
-		fun getTokenType(@MagicConstant(valuesFromClass = MintLexer::class) rule: Int): IElementType {
-			return PSIElementTypeFactory.getTokenIElementTypes(MintLanguage)[rule]
+		fun getTokenType(@MagicConstant(valuesFromClass = MintLexer::class) token: Int): IElementType {
+			return PSIElementTypeFactory.getTokenIElementTypes(MintLanguage)[token]
+		}
+
+		fun getRuleType(@MagicConstant(valuesFromClass = MintParser::class) rule: Int): IElementType {
+			return PSIElementTypeFactory.getRuleIElementTypes(MintLanguage)[rule]
 		}
 
 		init {
@@ -78,4 +82,12 @@ class MintParserDefinition : ParserDefinition {
 			)
 		}
 	}
+}
+
+fun PsiElement.matchesAntlrRule(@MagicConstant(valuesFromClass = MintParser::class) rule: Int): Boolean {
+	return node?.elementType == MintParserDefinition.getRuleType(rule)
+}
+
+fun PsiElement.matchesAntlrToken(@MagicConstant(valuesFromClass = MintLexer::class) token: Int): Boolean {
+	return node?.elementType == MintParserDefinition.getTokenType(token)
 }

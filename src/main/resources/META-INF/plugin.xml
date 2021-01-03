@@ -19,6 +19,8 @@
 		<colorSettingsPage implementation="com.github.bjansen.mintellij.lang.MintColorSettingsPage"/>
 
 		<configurationType implementation="com.github.bjansen.mintellij.runConfig.MintRunConfigurationType"/>
+		<runLineMarkerContributor language="Mint" implementationClass="com.github.bjansen.mintellij.runConfig.MintLineMarkerContributor"/>
+		<runConfigurationProducer implementation="com.github.bjansen.mintellij.runConfig.MintRunConfigurationProducer"/>
 	</extensions>
 
 	<actions>
