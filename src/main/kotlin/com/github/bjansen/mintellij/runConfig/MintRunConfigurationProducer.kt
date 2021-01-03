@@ -1,5 +1,7 @@
 package com.github.bjansen.mintellij.runConfig
 
+import com.github.bjansen.mintellij.MintLexer
+import com.github.bjansen.mintellij.psi.matchesAntlrToken
 import com.intellij.execution.actions.ConfigurationContext
 import com.intellij.execution.actions.LazyRunConfigurationProducer
 import com.intellij.execution.configurations.ConfigurationFactory
@@ -15,12 +17,26 @@ class MintRunConfigurationProducer : LazyRunConfigurationProducer<MintRunConfigu
 	}
 
 	override fun isConfigurationFromContext(configuration: MintRunConfiguration, context: ConfigurationContext): Boolean {
-		return configuration.state?.subcommand?.equals("start") ?: false
+		return if (context.psiLocation?.matchesAntlrToken(MintLexer.TypeId) == true) {
+			// Main component
+			configuration.state?.subcommand?.equals("start") ?: false
+		} else {
+			// A test suite
+			configuration.state?.subcommand?.equals("test") ?: false
+		}
 	}
 
 	override fun setupConfigurationFromContext(configuration: MintRunConfiguration, context: ConfigurationContext, sourceElement: Ref<PsiElement>): Boolean {
-		configuration.state?.subcommand = "start"
-		configuration.name = "mint start"
+		if (context.psiLocation?.matchesAntlrToken(MintLexer.TypeId) == true) {
+			// Main component
+			configuration.state?.subcommand = "start"
+			configuration.name = "mint start"
+		} else {
+			// A test suite
+			configuration.state?.subcommand = "test"
+			configuration.state?.arguments = "--reporter documentation"
+			configuration.name = "mint test"
+		}
 
 		return true
 	}

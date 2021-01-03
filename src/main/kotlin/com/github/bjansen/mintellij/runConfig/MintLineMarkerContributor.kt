@@ -12,10 +12,7 @@ import com.intellij.psi.PsiElement
 class MintLineMarkerContributor : RunLineMarkerContributor() {
 
 	override fun getInfo(element: PsiElement): Info? {
-		if (element.matchesAntlrToken(MintLexer.TypeId)
-				&& element.text == "Main"
-				&& element.parent?.matchesAntlrRule(MintParser.RULE_type_id) == true
-				&& element.parent?.parent?.matchesAntlrRule(MintParser.RULE_component) == true) {
+		if (isMainComponent(element) || isSuite(element)) {
 
 			return Info(
 					AllIcons.RunConfigurations.TestState.Run,
@@ -26,4 +23,14 @@ class MintLineMarkerContributor : RunLineMarkerContributor() {
 
 		return null
 	}
+
+	private fun isSuite(element: PsiElement) =
+			element.matchesAntlrToken(MintLexer.StringLiteral)
+					&& element.parent?.matchesAntlrRule(MintParser.RULE_suite) == true
+
+	private fun isMainComponent(element: PsiElement) =
+			element.matchesAntlrToken(MintLexer.TypeId)
+					&& element.text == "Main"
+					&& element.parent?.matchesAntlrRule(MintParser.RULE_type_id) == true
+					&& element.parent?.parent?.matchesAntlrRule(MintParser.RULE_component) == true
 }
