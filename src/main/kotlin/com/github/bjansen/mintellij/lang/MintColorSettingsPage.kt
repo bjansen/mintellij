@@ -68,7 +68,11 @@ class MintColorSettingsPage : ColorSettingsPage {
 				AttributesDescriptor("Braces and Operators//Paren", MintSyntaxHighlighter.PAREN),
 				AttributesDescriptor("Braces and Operators//Bracket", MintSyntaxHighlighter.BRACKET),
 				AttributesDescriptor("Braces and Operators//Dot", MintSyntaxHighlighter.DOT),
-				AttributesDescriptor("Braces and Operators//Semicolon", MintSyntaxHighlighter.SEMICOLON)
+				AttributesDescriptor("Braces and Operators//Semicolon", MintSyntaxHighlighter.SEMICOLON),
+				AttributesDescriptor("HTML & Style//HTML tag name", MintSyntaxHighlighter.HTML_TAG),
+				AttributesDescriptor("HTML & Style//HTML attribute name", MintSyntaxHighlighter.HTML_ATTR),
+				AttributesDescriptor("HTML & Style//Style name", MintSyntaxHighlighter.HTML_STYLE),
+				AttributesDescriptor("HTML & Style//Style property name", MintSyntaxHighlighter.STYLE_PROPERTY)
 		)
 	}
 }

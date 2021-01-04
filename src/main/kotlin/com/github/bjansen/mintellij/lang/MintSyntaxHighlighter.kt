@@ -3,6 +3,7 @@ package com.github.bjansen.mintellij.lang
 import com.github.bjansen.mintellij.MintLexer
 import com.github.bjansen.mintellij.psi.MintParserDefinition.Companion.getTokenType
 import com.intellij.openapi.editor.DefaultLanguageHighlighterColors
+import com.intellij.openapi.editor.XmlHighlighterColors
 import com.intellij.openapi.editor.colors.TextAttributesKey
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase
 import com.intellij.psi.tree.IElementType
@@ -185,6 +186,24 @@ class MintSyntaxHighlighter : SyntaxHighlighterBase() {
 		val NUMBER = TextAttributesKey.createTextAttributesKey(
 				"MintNumber",
 				DefaultLanguageHighlighterColors.NUMBER
+		)
+
+		val HTML_TAG = TextAttributesKey.createTextAttributesKey(
+				"MintHtmlTag",
+				XmlHighlighterColors.HTML_TAG_NAME
+		)
+
+		val HTML_ATTR = TextAttributesKey.createTextAttributesKey(
+				"MintHtmlAttribute",
+				XmlHighlighterColors.HTML_ATTRIBUTE_NAME
+		)
+
+		val HTML_STYLE = TextAttributesKey.createTextAttributesKey(
+				"MintHtmlStyle"
+		)
+
+		val STYLE_PROPERTY = TextAttributesKey.createTextAttributesKey(
+				"MintStyleProperty"
 		)
 	}
 }

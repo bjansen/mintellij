@@ -14,9 +14,10 @@
 			implementationClass="com.github.bjansen.mintellij.lang.MintFileType"/>
 		<lang.parserDefinition language="Mint" implementationClass="com.github.bjansen.mintellij.psi.MintParserDefinition"/>
 		<lang.syntaxHighlighter language="Mint" implementationClass="com.github.bjansen.mintellij.lang.MintSyntaxHighlighter"/>
+		<annotator language="Mint" implementationClass="com.github.bjansen.mintellij.lang.MintSyntaxAnnotator"/>
+		<colorSettingsPage implementation="com.github.bjansen.mintellij.lang.MintColorSettingsPage"/>
 		<lang.commenter language="Mint" implementationClass="com.github.bjansen.mintellij.lang.MintCommenter"/>
 		<lang.braceMatcher language="Mint" implementationClass="com.github.bjansen.mintellij.lang.MintBraceMatcher"/>
-		<colorSettingsPage implementation="com.github.bjansen.mintellij.lang.MintColorSettingsPage"/>
 
 		<configurationType implementation="com.github.bjansen.mintellij.runConfig.MintRunConfigurationType"/>
 		<runLineMarkerContributor language="Mint" implementationClass="com.github.bjansen.mintellij.runConfig.MintLineMarkerContributor"/>
