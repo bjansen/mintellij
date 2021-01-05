@@ -3,4 +3,4 @@ package com.github.bjansen.mintellij.psi
 import com.intellij.extapi.psi.ASTWrapperPsiElement
 import com.intellij.lang.ASTNode
 
-class MintElement(node: ASTNode) : ASTWrapperPsiElement(node)
+open class MintElement(node: ASTNode) : ASTWrapperPsiElement(node)

@@ -5,19 +5,25 @@ import com.github.bjansen.mintellij.MintParser
 import com.github.bjansen.mintellij.lang.MintLanguage
 import com.intellij.lang.ASTNode
 import com.intellij.lang.ParserDefinition
+import com.intellij.lang.PsiBuilder
 import com.intellij.lang.PsiParser
 import com.intellij.lexer.Lexer
+import com.intellij.openapi.progress.ProgressIndicatorProvider
 import com.intellij.openapi.project.Project
 import com.intellij.psi.FileViewProvider
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
+import com.intellij.psi.stubs.PsiFileStub
 import com.intellij.psi.tree.IElementType
 import com.intellij.psi.tree.IFileElementType
+import com.intellij.psi.tree.IStubFileElementType
 import com.intellij.psi.tree.TokenSet
 import org.antlr.intellij.adaptor.lexer.ANTLRLexerAdaptor
 import org.antlr.intellij.adaptor.lexer.PSIElementTypeFactory
+import org.antlr.intellij.adaptor.parser.ANTLRParseTreeToPSIConverter
 import org.antlr.intellij.adaptor.parser.ANTLRParserAdaptor
 import org.antlr.v4.runtime.Parser
+import org.antlr.v4.runtime.ParserRuleContext
 import org.antlr.v4.runtime.tree.ParseTree
 import org.intellij.lang.annotations.MagicConstant
 
@@ -36,6 +42,19 @@ class MintParserDefinition : ParserDefinition {
 			override fun parse(parser: Parser, root: IElementType): ParseTree {
 				return (parser as MintParser).topLevel()
 			}
+
+            override fun createListener(parser: Parser?, root: IElementType?, builder: PsiBuilder?): ANTLRParseTreeToPSIConverter {
+                return object : ANTLRParseTreeToPSIConverter(language, parser, builder) {
+                    override fun exitEveryRule(ctx: ParserRuleContext?) {
+                        if (ctx?.ruleIndex == MintParser.RULE_module_definition) {
+                            ProgressIndicatorProvider.checkCanceled()
+                            markers.pop().done(MintModuleStubElementType)
+                        } else {
+                            super.exitEveryRule(ctx)
+                        }
+                    }
+                }
+            }
 		}
 	}
 
@@ -56,7 +75,10 @@ class MintParserDefinition : ParserDefinition {
 	}
 
 	override fun createElement(node: ASTNode): PsiElement {
-		return MintElement(node)
+		return when (node.elementType) {
+            MintModuleStubElementType -> MintModule(node)
+            else -> MintElement(node)
+        }
 	}
 
 	override fun createFile(viewProvider: FileViewProvider): PsiFile {
@@ -64,7 +86,7 @@ class MintParserDefinition : ParserDefinition {
 	}
 
 	companion object {
-		private val FILE = IFileElementType(MintLanguage)
+		private val FILE = IStubFileElementType<PsiFileStub<MintFile>>(MintLanguage)
 
 		fun getTokenType(@MagicConstant(valuesFromClass = MintLexer::class) token: Int): IElementType {
 			return PSIElementTypeFactory.getTokenIElementTypes(MintLanguage)[token]
