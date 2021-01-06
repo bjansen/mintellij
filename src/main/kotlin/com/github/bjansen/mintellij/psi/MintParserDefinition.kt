@@ -46,11 +46,15 @@ class MintParserDefinition : ParserDefinition {
             override fun createListener(parser: Parser?, root: IElementType?, builder: PsiBuilder?): ANTLRParseTreeToPSIConverter {
                 return object : ANTLRParseTreeToPSIConverter(language, parser, builder) {
                     override fun exitEveryRule(ctx: ParserRuleContext?) {
-                        if (ctx?.ruleIndex == MintParser.RULE_module_definition) {
-                            ProgressIndicatorProvider.checkCanceled()
-                            markers.pop().done(MintModuleStubElementType)
-                        } else {
-                            super.exitEveryRule(ctx)
+                        ProgressIndicatorProvider.checkCanceled()
+
+                        when (ctx?.ruleIndex) {
+                            MintParser.RULE_module_definition -> markers.pop().done(MintModuleStubElementType)
+                            MintParser.RULE_component -> markers.pop().done(MintComponentStubElementType)
+                            MintParser.RULE_record_definition -> markers.pop().done(MintRecordStubElementType)
+                            MintParser.RULE_store -> markers.pop().done(MintStoreStubElementType)
+                            MintParser.RULE_enum_ -> markers.pop().done(MintEnumStubElementType)
+                            else -> super.exitEveryRule(ctx)
                         }
                     }
                 }
@@ -77,6 +81,10 @@ class MintParserDefinition : ParserDefinition {
 	override fun createElement(node: ASTNode): PsiElement {
 		return when (node.elementType) {
             MintModuleStubElementType -> MintModule(node)
+            MintComponentStubElementType -> MintComponent(node)
+            MintRecordStubElementType -> MintRecord(node)
+            MintStoreStubElementType -> MintStore(node)
+            MintEnumStubElementType -> MintEnum(node)
             else -> MintElement(node)
         }
 	}

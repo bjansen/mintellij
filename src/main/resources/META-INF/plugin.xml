@@ -26,7 +26,11 @@
 
 		<stubElementTypeHolder class="com.github.bjansen.mintellij.psi.MintStubs"/>
 		<stubIndex implementation="com.github.bjansen.mintellij.psi.MintModuleStubIndex"/>
-		<gotoClassContributor implementation="com.github.bjansen.mintellij.navigation.GotoModuleContributor"/>
+		<stubIndex implementation="com.github.bjansen.mintellij.psi.MintComponentStubIndex"/>
+		<stubIndex implementation="com.github.bjansen.mintellij.psi.MintRecordStubIndex"/>
+		<stubIndex implementation="com.github.bjansen.mintellij.psi.MintStoreStubIndex"/>
+		<stubIndex implementation="com.github.bjansen.mintellij.psi.MintEnumStubIndex"/>
+		<gotoClassContributor implementation="com.github.bjansen.mintellij.navigation.GotoMintDeclarationContributor"/>
 	</extensions>
 
 	<actions>
