@@ -1,15 +1,18 @@
 package com.github.bjansen.mintellij.psi
 
 import com.github.bjansen.mintellij.MintLexer
+import com.github.bjansen.mintellij.icons.MintIcons
 import com.github.bjansen.mintellij.lang.MintLanguage
 import com.intellij.extapi.psi.StubBasedPsiElementBase
 import com.intellij.lang.ASTNode
+import com.intellij.navigation.ItemPresentationProviders
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiNameIdentifierOwner
 import com.intellij.psi.StubBasedPsiElement
 import com.intellij.psi.stubs.*
 
 class MintStore :
+    MintPsiElement,
     StubBasedPsiElementBase<MintStoreStub>,
     StubBasedPsiElement<MintStoreStub>,
     PsiNameIdentifierOwner {
@@ -28,6 +31,10 @@ class MintStore :
     override fun getNameIdentifier(): PsiElement? {
         return node.findChildByType(MintParserDefinition.getTokenType(MintLexer.TypeId))?.psi
     }
+
+    override fun getPresentation() = ItemPresentationProviders.getItemPresentation(this)
+
+    override fun getElementIcon(flags: Int) = MintIcons.store
 }
 
 interface MintStoreStub : StubElement<MintStore> {

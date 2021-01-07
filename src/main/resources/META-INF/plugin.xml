@@ -18,6 +18,8 @@
 		<colorSettingsPage implementation="com.github.bjansen.mintellij.lang.MintColorSettingsPage"/>
 		<lang.commenter language="Mint" implementationClass="com.github.bjansen.mintellij.lang.MintCommenter"/>
 		<lang.braceMatcher language="Mint" implementationClass="com.github.bjansen.mintellij.lang.MintBraceMatcher"/>
+		<itemPresentationProvider forClass="com.github.bjansen.mintellij.psi.MintPsiElement"
+			implementationClass="com.github.bjansen.mintellij.navigation.MintItemPresentationProvider"/>
 
 		<configurationType implementation="com.github.bjansen.mintellij.runConfig.MintRunConfigurationType"/>
 		<runLineMarkerContributor language="Mint" implementationClass="com.github.bjansen.mintellij.runConfig.MintLineMarkerContributor"/>

@@ -1,15 +1,19 @@
 package com.github.bjansen.mintellij.psi
 
 import com.github.bjansen.mintellij.MintParser
+import com.github.bjansen.mintellij.icons.MintIcons
 import com.github.bjansen.mintellij.lang.MintLanguage
 import com.intellij.extapi.psi.StubBasedPsiElementBase
 import com.intellij.lang.ASTNode
+import com.intellij.navigation.ItemPresentationProviders
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiNameIdentifierOwner
 import com.intellij.psi.StubBasedPsiElement
 import com.intellij.psi.stubs.*
+import javax.swing.Icon
 
 class MintComponent :
+    MintPsiElement,
     StubBasedPsiElementBase<MintComponentStub>,
     StubBasedPsiElement<MintComponentStub>,
     PsiNameIdentifierOwner {
@@ -28,6 +32,10 @@ class MintComponent :
     override fun getNameIdentifier(): PsiElement? {
         return node.findChildByType(MintParserDefinition.getRuleType(MintParser.RULE_type_id))?.psi
     }
+
+    override fun getPresentation() = ItemPresentationProviders.getItemPresentation(this)
+
+    override fun getElementIcon(flags: Int) = MintIcons.component
 }
 
 interface MintComponentStub : StubElement<MintComponent> {
