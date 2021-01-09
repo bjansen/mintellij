@@ -33,6 +33,9 @@
 		<stubIndex implementation="com.github.bjansen.mintellij.psi.MintStoreStubIndex"/>
 		<stubIndex implementation="com.github.bjansen.mintellij.psi.MintEnumStubIndex"/>
 		<gotoClassContributor implementation="com.github.bjansen.mintellij.navigation.GotoMintDeclarationContributor"/>
+
+		<lang.psiStructureViewFactory language="Mint"
+			implementationClass="com.github.bjansen.mintellij.structureView.MintStructureViewFactory"/>
 	</extensions>
 
 	<actions>

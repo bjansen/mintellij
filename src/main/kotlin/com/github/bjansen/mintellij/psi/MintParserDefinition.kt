@@ -18,6 +18,7 @@ import com.intellij.psi.tree.IElementType
 import com.intellij.psi.tree.IFileElementType
 import com.intellij.psi.tree.IStubFileElementType
 import com.intellij.psi.tree.TokenSet
+import com.intellij.util.containers.map2Array
 import org.antlr.intellij.adaptor.lexer.ANTLRLexerAdaptor
 import org.antlr.intellij.adaptor.lexer.PSIElementTypeFactory
 import org.antlr.intellij.adaptor.parser.ANTLRParseTreeToPSIConverter
@@ -85,6 +86,7 @@ class MintParserDefinition : ParserDefinition {
             MintRecordStubElementType -> MintRecord(node)
             MintStoreStubElementType -> MintStore(node)
             MintEnumStubElementType -> MintEnum(node)
+            getRuleType(MintParser.RULE_function) -> MintFunction(node)
             else -> MintElement(node)
         }
 	}
@@ -116,6 +118,16 @@ class MintParserDefinition : ParserDefinition {
 
 fun PsiElement.matchesAntlrRule(@MagicConstant(valuesFromClass = MintParser::class) rule: Int): Boolean {
 	return node?.elementType == MintParserDefinition.getRuleType(rule)
+}
+
+fun PsiElement.firstChildMatchingAntlrRule(@MagicConstant(valuesFromClass = MintParser::class) rule: Int): PsiElement? {
+	return node?.findChildByType(MintParserDefinition.getRuleType(rule))?.psi
+}
+
+fun PsiElement.findChildrenMatchingAntlrRule(@MagicConstant(valuesFromClass = MintParser::class) rule: Int): Array<PsiElement>? {
+    return node
+        ?.getChildren(TokenSet.create(MintParserDefinition.getRuleType(rule)))
+        ?.map2Array { it.psi }
 }
 
 fun PsiElement.matchesAntlrToken(@MagicConstant(valuesFromClass = MintLexer::class) token: Int): Boolean {
