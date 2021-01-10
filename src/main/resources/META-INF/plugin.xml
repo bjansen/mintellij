@@ -36,6 +36,8 @@
 
 		<lang.psiStructureViewFactory language="Mint"
 			implementationClass="com.github.bjansen.mintellij.structureView.MintStructureViewFactory"/>
+
+		<completion.contributor language="Mint" implementationClass="com.github.bjansen.mintellij.completion.MintCompletionContributor"/>
 	</extensions>
 
 	<actions>
