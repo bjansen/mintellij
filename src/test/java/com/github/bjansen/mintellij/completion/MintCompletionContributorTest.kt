@@ -21,7 +21,7 @@ class MintCompletionContributorTest : LightPlatformCodeInsightFixture4TestCase()
 
     @Test
     fun testCompletionOfFunctionParameterTypes() {
-        myFixture.configureByFiles("function-parameters.mint", "mint-core.mint")
+        myFixture.configureByFiles("function-parameter-type.mint", "mint-core.mint")
 
         val lookups = myFixture.complete(CompletionType.BASIC)
         assertContainsElements(
@@ -57,6 +57,28 @@ class MintCompletionContributorTest : LightPlatformCodeInsightFixture4TestCase()
         assertContainsElements(
             lookups.map { it.lookupString },
             "Maybe", "Math"
+        )
+    }
+
+    @Test
+    fun testCompletionOfModuleInParens() {
+        myFixture.configureByFiles("module-expression-3.mint", "mint-core.mint")
+
+        val lookups = myFixture.complete(CompletionType.BASIC)
+        assertContainsElements(
+            lookups.map { it.lookupString },
+            "String", "Maybe", "Math", "Array"
+        )
+    }
+
+    @Test
+    fun testCompletionOfModuleInBody() {
+        myFixture.configureByFiles("module-expression-4.mint", "mint-core.mint")
+
+        val lookups = myFixture.complete(CompletionType.BASIC)
+        assertContainsElements(
+            lookups.map { it.lookupString },
+            "String", "Maybe", "Math", "Array"
         )
     }
 
