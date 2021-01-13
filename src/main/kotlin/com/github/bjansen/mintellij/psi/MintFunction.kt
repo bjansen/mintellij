@@ -22,12 +22,15 @@ class MintFunction(node: ASTNode) : MintElement(node), MintPsiElement, PsiNameId
     override fun getElementIcon(flags: Int) = MintIcons.function
 
     fun getSignature(): String {
-        val parameterTypes = firstChildMatchingAntlrRule(MintParser.RULE_parameter_list)
-            ?.findChildrenMatchingAntlrRule(MintParser.RULE_parameter)
+        val parameterTypes = getParameters()
             ?.mapNotNull { it.firstChildMatchingAntlrRule(MintParser.RULE_type_or_type_variable)?.text }
             ?.joinToString(", ")
             ?: ""
 
         return "$name($parameterTypes)"
     }
+
+    fun getParameters() =
+        firstChildMatchingAntlrRule(MintParser.RULE_parameter_list)
+            ?.findChildrenMatchingAntlrRule(MintParser.RULE_parameter)
 }

@@ -31,5 +31,19 @@ class MintCompletionContributor : CompletionContributor() {
             psiElement(getTokenType(MintLexer.TypeId)).withSuperParent(2, psiElement(getRuleType(MintParser.RULE_module_access))),
             MintTypeCompletionProvider
         )
+
+        // Function parameter usage (no prefix, parent is a PsiErrorElement)
+        extend(
+            CompletionType.BASIC,
+            psiElement(getTokenType(MintLexer.TypeId)).withSuperParent(2, psiElement(getRuleType(MintParser.RULE_basic_expression))),
+            MintFunctionParameterCompletionProvider
+        )
+
+        // Function parameter usage (with prefix)
+        extend(
+            CompletionType.BASIC,
+            psiElement(getTokenType(MintLexer.Variable)).withSuperParent(2, psiElement(getRuleType(MintParser.RULE_basic_expression))),
+            MintFunctionParameterCompletionProvider
+        )
     }
 }

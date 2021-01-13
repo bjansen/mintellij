@@ -92,4 +92,27 @@ class MintCompletionContributorTest : LightPlatformCodeInsightFixture4TestCase()
             "Maybe", "Math"
         )
     }
+
+    @Test
+    fun testCompletionOfFunctionParameterInBodyNoPrefix() {
+        myFixture.configureByFiles("function-parameter.mint", "mint-core.mint")
+
+        val lookups = myFixture.complete(CompletionType.BASIC)
+        assertContainsElements(
+            lookups.map { it.lookupString },
+            "foo"
+        )
+    }
+
+    @Test
+    fun testCompletionOfFunctionParameterInBodyWithPrefix() {
+        myFixture.configureByFiles("function-parameter-2.mint", "mint-core.mint")
+
+        val lookups = myFixture.complete(CompletionType.BASIC)
+
+        assertContainsElements(
+            lookups.map { it.lookupString },
+            "myParam", "myOtherParam"
+        )
+    }
 }
