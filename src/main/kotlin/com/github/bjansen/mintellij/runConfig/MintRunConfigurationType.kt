@@ -1,7 +1,7 @@
 package com.github.bjansen.mintellij.runConfig
 
+import com.github.bjansen.mintellij.icons.MintIcons
 import com.intellij.execution.configurations.ConfigurationType
-import com.intellij.openapi.util.IconLoader
 
 class MintRunConfigurationType : ConfigurationType {
 
@@ -9,7 +9,7 @@ class MintRunConfigurationType : ConfigurationType {
 
 	override fun getConfigurationTypeDescription() = "Mint run configuration type"
 
-	override fun getIcon() = IconLoader.getIcon("/mint/icons/logo.svg")
+	override fun getIcon() = MintIcons.file
 
 	override fun getId() = "MintRunConfiguration"
 

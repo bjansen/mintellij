@@ -3,8 +3,9 @@ package com.github.bjansen.mintellij.structureView
 import com.github.bjansen.mintellij.icons.MintIcons
 import com.github.bjansen.mintellij.lang.MintFileType
 import com.intellij.ide.structureView.StructureViewTreeElement
+import com.intellij.openapi.util.IconLoader.CachedImageIcon
 import com.intellij.testFramework.fixtures.LightPlatformCodeInsightFixture4TestCase
-import com.intellij.ui.IconTestUtil.renderDeferredIcon
+import com.intellij.ui.DeferredIcon
 import org.junit.Test
 import javax.swing.Icon
 
@@ -91,8 +92,12 @@ class MintStructureViewTest : LightPlatformCodeInsightFixture4TestCase() {
     }
 
     private fun assertIconEquals(expected: Icon?, actual: Icon?) {
-        // TODO this is very slow (several seconds!)
-        assertTrue(renderDeferredIcon(actual).contains(expected))
+        val expectedPath = (expected as CachedImageIcon).originalPath
+        val actualPath = (actual as DeferredIcon).evaluate().toString()
+
+        if (!actualPath.contains(expectedPath!!)) {
+            fail("Expected icon $actualPath to contain $expectedPath")
+        }
     }
 }
 

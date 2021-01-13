@@ -10,8 +10,6 @@ jobs:
     strategy:
       matrix:
         env:
-          - IDEA_VERSION: IC-2019.2
-          - IDEA_VERSION: IC-2019.3.2
           - IDEA_VERSION: IC-2020.1.4
           - IDEA_VERSION: IC-2020.2
           - IDEA_VERSION: IC-2020.3

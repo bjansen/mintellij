@@ -1,15 +1,15 @@
 package com.github.bjansen.mintellij.lang
 
+import com.github.bjansen.mintellij.icons.MintIcons
 import com.intellij.openapi.editor.colors.TextAttributesKey
 import com.intellij.openapi.options.colors.AttributesDescriptor
 import com.intellij.openapi.options.colors.ColorDescriptor
 import com.intellij.openapi.options.colors.ColorSettingsPage
-import com.intellij.openapi.util.IconLoader
 import org.jetbrains.annotations.NonNls
 
 class MintColorSettingsPage : ColorSettingsPage {
 
-	override fun getIcon() = IconLoader.getIcon("/mint/icons/logo.svg")
+	override fun getIcon() = MintIcons.file
 
 	override fun getHighlighter() = MintSyntaxHighlighter()
 
