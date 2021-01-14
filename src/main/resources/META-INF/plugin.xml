@@ -3,10 +3,6 @@
 	<name>Mint</name>
 	<vendor email="bastien.jansen@gmx.com" url="https://github.com/bjansen">Bastien Jansen</vendor>
 
-	<description><![CDATA[
-        Adds support for the <a href="https://www.mint-lang.com">Mint programming language</a>.
-    ]]></description>
-
 	<depends>com.intellij.modules.platform</depends>
 
 	<extensions defaultExtensionNs="com.intellij">
