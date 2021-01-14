@@ -20,12 +20,14 @@ class MintSyntaxAnnotator : Annotator {
                 holder.newSilentAnnotation(HighlightSeverity.INFORMATION)
                     .range(element)
                     .textAttributes(MintSyntaxHighlighter.HTML_TAG)
+                    .create()
             } else if (element.parent?.matchesAntlrRule(MintParser.RULE_html_style) == true
                 || element.parent?.matchesAntlrRule(MintParser.RULE_style) == true
             ) {
                 holder.newSilentAnnotation(HighlightSeverity.INFORMATION)
                     .range(element)
                     .textAttributes(MintSyntaxHighlighter.HTML_STYLE)
+                    .create()
             }
         }
 
@@ -33,6 +35,7 @@ class MintSyntaxAnnotator : Annotator {
             holder.newSilentAnnotation(HighlightSeverity.INFORMATION)
                 .range(element)
                 .textAttributes(MintSyntaxHighlighter.HTML_ATTR)
+                .create()
         }
 
         if (element.matchesAntlrToken(MintLexer.VariableWithDashes)
@@ -42,6 +45,7 @@ class MintSyntaxAnnotator : Annotator {
                 holder.newSilentAnnotation(HighlightSeverity.INFORMATION)
                     .range(element)
                     .textAttributes(MintSyntaxHighlighter.STYLE_PROPERTY)
+                    .create()
             }
         }
     }
