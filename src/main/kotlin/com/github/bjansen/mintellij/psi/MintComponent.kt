@@ -9,8 +9,14 @@ import com.intellij.navigation.ItemPresentationProviders
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiNameIdentifierOwner
 import com.intellij.psi.StubBasedPsiElement
-import com.intellij.psi.stubs.*
-import javax.swing.Icon
+import com.intellij.psi.stubs.IStubElementType
+import com.intellij.psi.stubs.IndexSink
+import com.intellij.psi.stubs.StringStubIndexExtension
+import com.intellij.psi.stubs.StubBase
+import com.intellij.psi.stubs.StubElement
+import com.intellij.psi.stubs.StubIndexKey
+import com.intellij.psi.stubs.StubInputStream
+import com.intellij.psi.stubs.StubOutputStream
 
 class MintComponent :
     MintPsiElement,
@@ -21,7 +27,7 @@ class MintComponent :
     constructor(node: ASTNode) : super(node)
     constructor(stub: MintComponentStub) : super(stub, MintComponentStubElementType)
 
-    override fun getName() : String? {
+    override fun getName(): String? {
         return nameIdentifier?.text
     }
 

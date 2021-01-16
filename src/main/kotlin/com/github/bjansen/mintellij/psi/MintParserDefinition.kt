@@ -30,19 +30,19 @@ import org.intellij.lang.annotations.MagicConstant
 
 class MintParserDefinition : ParserDefinition {
 
-	override fun createLexer(project: Project): Lexer {
-		val delegate = MintLexer(null)
+    override fun createLexer(project: Project): Lexer {
+        val delegate = MintLexer(null)
 
-		return ANTLRLexerAdaptor(MintLanguage, delegate)
-	}
+        return ANTLRLexerAdaptor(MintLanguage, delegate)
+    }
 
-	override fun createParser(project: Project): PsiParser {
-		val delegate = MintParser(null)
+    override fun createParser(project: Project): PsiParser {
+        val delegate = MintParser(null)
 
-		return object : ANTLRParserAdaptor(MintLanguage, delegate) {
-			override fun parse(parser: Parser, root: IElementType): ParseTree {
-				return (parser as MintParser).topLevel()
-			}
+        return object : ANTLRParserAdaptor(MintLanguage, delegate) {
+            override fun parse(parser: Parser, root: IElementType): ParseTree {
+                return (parser as MintParser).topLevel()
+            }
 
             override fun createListener(parser: Parser?, root: IElementType?, builder: PsiBuilder?): ANTLRParseTreeToPSIConverter {
                 return object : ANTLRParseTreeToPSIConverter(language, parser, builder) {
@@ -60,27 +60,27 @@ class MintParserDefinition : ParserDefinition {
                     }
                 }
             }
-		}
-	}
+        }
+    }
 
-	override fun getFileNodeType(): IFileElementType {
-		return FILE
-	}
+    override fun getFileNodeType(): IFileElementType {
+        return FILE
+    }
 
-	override fun getCommentTokens(): TokenSet {
-		return PSIElementTypeFactory.createTokenSet(MintLanguage, MintLexer.Comment)
-	}
+    override fun getCommentTokens(): TokenSet {
+        return PSIElementTypeFactory.createTokenSet(MintLanguage, MintLexer.Comment)
+    }
 
-	override fun getStringLiteralElements(): TokenSet {
-		return PSIElementTypeFactory.createTokenSet(MintLanguage, MintLexer.StringLiteral)
-	}
+    override fun getStringLiteralElements(): TokenSet {
+        return PSIElementTypeFactory.createTokenSet(MintLanguage, MintLexer.StringLiteral)
+    }
 
-	override fun getWhitespaceTokens(): TokenSet {
-		return PSIElementTypeFactory.createTokenSet(MintLanguage, MintLexer.WS)
-	}
+    override fun getWhitespaceTokens(): TokenSet {
+        return PSIElementTypeFactory.createTokenSet(MintLanguage, MintLexer.WS)
+    }
 
-	override fun createElement(node: ASTNode): PsiElement {
-		return when (node.elementType) {
+    override fun createElement(node: ASTNode): PsiElement {
+        return when (node.elementType) {
             MintModuleStubElementType -> MintModule(node)
             MintComponentStubElementType -> MintComponent(node)
             MintRecordStubElementType -> MintRecord(node)
@@ -89,39 +89,39 @@ class MintParserDefinition : ParserDefinition {
             getRuleType(MintParser.RULE_function) -> MintFunction(node)
             else -> MintElement(node)
         }
-	}
+    }
 
-	override fun createFile(viewProvider: FileViewProvider): PsiFile {
-		return MintFile(viewProvider)
-	}
+    override fun createFile(viewProvider: FileViewProvider): PsiFile {
+        return MintFile(viewProvider)
+    }
 
-	companion object {
-		private val FILE = IStubFileElementType<PsiFileStub<MintFile>>(MintLanguage)
+    companion object {
+        private val FILE = IStubFileElementType<PsiFileStub<MintFile>>(MintLanguage)
 
-		fun getTokenType(@MagicConstant(valuesFromClass = MintLexer::class) token: Int): IElementType {
-			return PSIElementTypeFactory.getTokenIElementTypes(MintLanguage)[token]
-		}
+        fun getTokenType(@MagicConstant(valuesFromClass = MintLexer::class) token: Int): IElementType {
+            return PSIElementTypeFactory.getTokenIElementTypes(MintLanguage)[token]
+        }
 
-		fun getRuleType(@MagicConstant(valuesFromClass = MintParser::class) rule: Int): IElementType {
-			return PSIElementTypeFactory.getRuleIElementTypes(MintLanguage)[rule]
-		}
+        fun getRuleType(@MagicConstant(valuesFromClass = MintParser::class) rule: Int): IElementType {
+            return PSIElementTypeFactory.getRuleIElementTypes(MintLanguage)[rule]
+        }
 
-		init {
-			PSIElementTypeFactory.defineLanguageIElementTypes(
-					MintLanguage,
-					MintLexer.tokenNames,
-					MintParser.ruleNames
-			)
-		}
-	}
+        init {
+            PSIElementTypeFactory.defineLanguageIElementTypes(
+                MintLanguage,
+                MintLexer.tokenNames,
+                MintParser.ruleNames
+            )
+        }
+    }
 }
 
 fun PsiElement.matchesAntlrRule(@MagicConstant(valuesFromClass = MintParser::class) rule: Int): Boolean {
-	return node?.elementType == MintParserDefinition.getRuleType(rule)
+    return node?.elementType == MintParserDefinition.getRuleType(rule)
 }
 
 fun PsiElement.firstChildMatchingAntlrRule(@MagicConstant(valuesFromClass = MintParser::class) rule: Int): PsiElement? {
-	return node?.findChildByType(MintParserDefinition.getRuleType(rule))?.psi
+    return node?.findChildByType(MintParserDefinition.getRuleType(rule))?.psi
 }
 
 fun PsiElement.findChildrenMatchingAntlrRule(@MagicConstant(valuesFromClass = MintParser::class) rule: Int): Array<PsiElement>? {
@@ -131,5 +131,5 @@ fun PsiElement.findChildrenMatchingAntlrRule(@MagicConstant(valuesFromClass = Mi
 }
 
 fun PsiElement.matchesAntlrToken(@MagicConstant(valuesFromClass = MintLexer::class) token: Int): Boolean {
-	return node?.elementType == MintParserDefinition.getTokenType(token)
+    return node?.elementType == MintParserDefinition.getTokenType(token)
 }

@@ -7,12 +7,11 @@ import com.intellij.openapi.project.Project
 
 class MintRunConfigurationFactory(type: ConfigurationType) : ConfigurationFactory(type) {
 
-	override fun createTemplateConfiguration(project: Project): RunConfiguration {
-		return MintRunConfiguration(project, this, "Mint")
-	}
+    override fun createTemplateConfiguration(project: Project): RunConfiguration {
+        return MintRunConfiguration(project, this, "Mint")
+    }
 
-	override fun getId() = "MintConfigurationFactory"
+    override fun getId() = "MintConfigurationFactory"
 
-	override fun getName() = "Mint configuration factory"
-
+    override fun getName() = "Mint configuration factory"
 }

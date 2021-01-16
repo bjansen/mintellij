@@ -4,10 +4,12 @@ root = true
 end_of_line = lf
 insert_final_newline = true
 max_line_length = 140
+ij_kotlin_name_count_to_use_star_import = 999
+ij_kotlin_name_count_to_use_star_import_for_members = 999
 
-[*.{kotlin,xml}]
+[*.{kt,kts,xml,java}]
 charset = utf-8
-indent_style = tab
+indent_style = space
 indent_size = 4
 
 [*.yml]

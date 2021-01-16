@@ -7,5 +7,5 @@ import com.intellij.psi.FileViewProvider
 
 class MintFile(viewProvider: FileViewProvider) : PsiFileBase(viewProvider, MintLanguage), MintPsiElement {
 
-	override fun getFileType() = MintFileType
+    override fun getFileType() = MintFileType
 }

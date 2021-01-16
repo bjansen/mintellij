@@ -9,13 +9,13 @@ import org.jetbrains.annotations.NonNls
 
 class MintColorSettingsPage : ColorSettingsPage {
 
-	override fun getIcon() = MintIcons.file
+    override fun getIcon() = MintIcons.file
 
-	override fun getHighlighter() = MintSyntaxHighlighter()
+    override fun getHighlighter() = MintSyntaxHighlighter()
 
-	@NonNls
-	override fun getDemoText(): String {
-		return """
+    @NonNls
+    override fun getDemoText(): String {
+        return """
             /*
              * Mint demo
              */
@@ -46,33 +46,33 @@ class MintColorSettingsPage : ColorSettingsPage {
                 </div>
               }
             }"""
-	}
+    }
 
-	override fun getAdditionalHighlightingTagToDescriptorMap(): Map<String, TextAttributesKey>? = null
+    override fun getAdditionalHighlightingTagToDescriptorMap(): Map<String, TextAttributesKey>? = null
 
-	override fun getAttributeDescriptors() = DESCRIPTORS
+    override fun getAttributeDescriptors() = DESCRIPTORS
 
-	override fun getColorDescriptors(): Array<ColorDescriptor> = ColorDescriptor.EMPTY_ARRAY
+    override fun getColorDescriptors(): Array<ColorDescriptor> = ColorDescriptor.EMPTY_ARRAY
 
-	override fun getDisplayName() = "Mint"
+    override fun getDisplayName() = "Mint"
 
-	companion object {
-		private val DESCRIPTORS = arrayOf(
-				AttributesDescriptor("Keyword", MintSyntaxHighlighter.KEYWORD),
-				AttributesDescriptor("Comment", MintSyntaxHighlighter.COMMENT),
-				AttributesDescriptor("Type", MintSyntaxHighlighter.TYPE),
-				AttributesDescriptor("String", MintSyntaxHighlighter.STRING),
-				AttributesDescriptor("Number", MintSyntaxHighlighter.NUMBER),
-				AttributesDescriptor("Braces and Operators//Operator", MintSyntaxHighlighter.OPERATOR),
-				AttributesDescriptor("Braces and Operators//Brace", MintSyntaxHighlighter.BRACE),
-				AttributesDescriptor("Braces and Operators//Paren", MintSyntaxHighlighter.PAREN),
-				AttributesDescriptor("Braces and Operators//Bracket", MintSyntaxHighlighter.BRACKET),
-				AttributesDescriptor("Braces and Operators//Dot", MintSyntaxHighlighter.DOT),
-				AttributesDescriptor("Braces and Operators//Semicolon", MintSyntaxHighlighter.SEMICOLON),
-				AttributesDescriptor("HTML & Style//HTML tag name", MintSyntaxHighlighter.HTML_TAG),
-				AttributesDescriptor("HTML & Style//HTML attribute name", MintSyntaxHighlighter.HTML_ATTR),
-				AttributesDescriptor("HTML & Style//Style name", MintSyntaxHighlighter.HTML_STYLE),
-				AttributesDescriptor("HTML & Style//Style property name", MintSyntaxHighlighter.STYLE_PROPERTY)
-		)
-	}
+    companion object {
+        private val DESCRIPTORS = arrayOf(
+            AttributesDescriptor("Keyword", MintSyntaxHighlighter.KEYWORD),
+            AttributesDescriptor("Comment", MintSyntaxHighlighter.COMMENT),
+            AttributesDescriptor("Type", MintSyntaxHighlighter.TYPE),
+            AttributesDescriptor("String", MintSyntaxHighlighter.STRING),
+            AttributesDescriptor("Number", MintSyntaxHighlighter.NUMBER),
+            AttributesDescriptor("Braces and Operators//Operator", MintSyntaxHighlighter.OPERATOR),
+            AttributesDescriptor("Braces and Operators//Brace", MintSyntaxHighlighter.BRACE),
+            AttributesDescriptor("Braces and Operators//Paren", MintSyntaxHighlighter.PAREN),
+            AttributesDescriptor("Braces and Operators//Bracket", MintSyntaxHighlighter.BRACKET),
+            AttributesDescriptor("Braces and Operators//Dot", MintSyntaxHighlighter.DOT),
+            AttributesDescriptor("Braces and Operators//Semicolon", MintSyntaxHighlighter.SEMICOLON),
+            AttributesDescriptor("HTML & Style//HTML tag name", MintSyntaxHighlighter.HTML_TAG),
+            AttributesDescriptor("HTML & Style//HTML attribute name", MintSyntaxHighlighter.HTML_ATTR),
+            AttributesDescriptor("HTML & Style//Style name", MintSyntaxHighlighter.HTML_STYLE),
+            AttributesDescriptor("HTML & Style//Style property name", MintSyntaxHighlighter.STYLE_PROPERTY)
+        )
+    }
 }

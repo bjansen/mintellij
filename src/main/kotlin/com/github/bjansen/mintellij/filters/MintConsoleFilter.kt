@@ -1,6 +1,8 @@
 package com.github.bjansen.mintellij.filters
 
-import com.intellij.execution.filters.*
+import com.intellij.execution.filters.ConsoleFilterProvider
+import com.intellij.execution.filters.Filter
+import com.intellij.execution.filters.OpenFileHyperlinkInfo
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.project.guessProjectDir
 import java.util.regex.Pattern
@@ -14,16 +16,15 @@ import java.util.regex.Pattern
  */
 class MintConsoleFilterProvider : ConsoleFilterProvider {
 
-	override fun getDefaultFilters(project: Project) = arrayOf(MintConsoleFilter(project))
-
+    override fun getDefaultFilters(project: Project) = arrayOf(MintConsoleFilter(project))
 }
 
 class MintConsoleFilter(private val project: Project) : Filter {
 
-    private val filePattern: Pattern = Pattern.compile("(.*):(\\d+):(\\d+)")
+    private val filePattern: Pattern = Pattern.compile("(?<path>.*):(?<line>\\d+):(?<column>\\d+)")
 
-	override fun applyFilter(line: String, entireLength: Int): Filter.Result? {
-		if (line.length > 2 && line[0] == '┌') {
+    override fun applyFilter(line: String, entireLength: Int): Filter.Result? {
+        if (line.length > 2 && line[0] == '┌') {
             val start = line.indexOf('┬')
 
             if (start > 0) {
@@ -37,24 +38,23 @@ class MintConsoleFilter(private val project: Project) : Filter {
                     return createHyperlink(trimmed, startInConsole, endInConsole)
                 }
             }
-		}
+        }
 
         return null
-	}
+    }
 
     private fun createHyperlink(rawPath: CharSequence, start: Int, end: Int): Filter.Result? {
         val matcher = filePattern.matcher(rawPath)
 
-
         if (matcher.matches()) {
-            val file = project.guessProjectDir()?.findFileByRelativePath(matcher.group(1))
+            val file = project.guessProjectDir()?.findFileByRelativePath(matcher.group("path"))
 
-            if (file != null){
+            if (file != null) {
                 val link = OpenFileHyperlinkInfo(
                     project,
                     file,
-                    matcher.group(2).toInt() - 1,
-                    matcher.group(3).toInt() - 1
+                    matcher.group("line").toInt() - 1,
+                    matcher.group("column").toInt() - 1
                 )
 
                 return Filter.Result(start, end, link)

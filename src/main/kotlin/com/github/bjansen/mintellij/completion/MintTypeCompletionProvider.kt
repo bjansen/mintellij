@@ -1,7 +1,10 @@
 package com.github.bjansen.mintellij.completion
 
 import com.github.bjansen.mintellij.icons.MintIcons
-import com.github.bjansen.mintellij.psi.*
+import com.github.bjansen.mintellij.psi.MintComponentStubIndex
+import com.github.bjansen.mintellij.psi.MintEnumStubIndex
+import com.github.bjansen.mintellij.psi.MintModuleStubIndex
+import com.github.bjansen.mintellij.psi.MintRecordStubIndex
 import com.intellij.codeInsight.completion.CompletionParameters
 import com.intellij.codeInsight.completion.CompletionProvider
 import com.intellij.codeInsight.completion.CompletionResultSet

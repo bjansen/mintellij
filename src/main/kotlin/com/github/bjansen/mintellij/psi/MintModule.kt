@@ -4,15 +4,19 @@ import com.github.bjansen.mintellij.MintParser
 import com.github.bjansen.mintellij.icons.MintIcons
 import com.github.bjansen.mintellij.lang.MintLanguage
 import com.intellij.extapi.psi.StubBasedPsiElementBase
-import com.intellij.icons.AllIcons
 import com.intellij.lang.ASTNode
-import com.intellij.navigation.ItemPresentation
 import com.intellij.navigation.ItemPresentationProviders
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiNameIdentifierOwner
 import com.intellij.psi.StubBasedPsiElement
-import com.intellij.psi.stubs.*
-import javax.swing.Icon
+import com.intellij.psi.stubs.IStubElementType
+import com.intellij.psi.stubs.IndexSink
+import com.intellij.psi.stubs.StringStubIndexExtension
+import com.intellij.psi.stubs.StubBase
+import com.intellij.psi.stubs.StubElement
+import com.intellij.psi.stubs.StubIndexKey
+import com.intellij.psi.stubs.StubInputStream
+import com.intellij.psi.stubs.StubOutputStream
 
 class MintModule :
     MintPsiElement,
@@ -23,7 +27,7 @@ class MintModule :
     constructor(node: ASTNode) : super(node)
     constructor(stub: MintModuleStub) : super(stub, MintModuleStubElementType)
 
-    override fun getName() : String? {
+    override fun getName(): String? {
         return nameIdentifier?.text
     }
 

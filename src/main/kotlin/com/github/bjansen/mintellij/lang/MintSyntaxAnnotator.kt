@@ -21,8 +21,8 @@ class MintSyntaxAnnotator : Annotator {
                     .range(element)
                     .textAttributes(MintSyntaxHighlighter.HTML_TAG)
                     .create()
-            } else if (element.parent?.matchesAntlrRule(MintParser.RULE_html_style) == true
-                || element.parent?.matchesAntlrRule(MintParser.RULE_style) == true
+            } else if (element.parent?.matchesAntlrRule(MintParser.RULE_html_style) == true ||
+                element.parent?.matchesAntlrRule(MintParser.RULE_style) == true
             ) {
                 holder.newSilentAnnotation(HighlightSeverity.INFORMATION)
                     .range(element)
@@ -31,15 +31,17 @@ class MintSyntaxAnnotator : Annotator {
             }
         }
 
-        if (element.matchesAntlrRule(MintParser.RULE_variable) && element.parent?.matchesAntlrRule(MintParser.RULE_html_attribute) == true) {
+        if (element.matchesAntlrRule(MintParser.RULE_variable) &&
+            element.parent?.matchesAntlrRule(MintParser.RULE_html_attribute) == true
+        ) {
             holder.newSilentAnnotation(HighlightSeverity.INFORMATION)
                 .range(element)
                 .textAttributes(MintSyntaxHighlighter.HTML_ATTR)
                 .create()
         }
 
-        if (element.matchesAntlrToken(MintLexer.VariableWithDashes)
-            || element.matchesAntlrToken(MintLexer.Variable)
+        if (element.matchesAntlrToken(MintLexer.VariableWithDashes) ||
+            element.matchesAntlrToken(MintLexer.Variable)
         ) {
             if (element.parent?.matchesAntlrRule(MintParser.RULE_css_definition) == true) {
                 holder.newSilentAnnotation(HighlightSeverity.INFORMATION)

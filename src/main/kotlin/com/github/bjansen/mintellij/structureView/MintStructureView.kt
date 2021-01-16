@@ -1,9 +1,20 @@
 package com.github.bjansen.mintellij.structureView
 
 import com.github.bjansen.mintellij.MintParser
-import com.github.bjansen.mintellij.psi.*
+import com.github.bjansen.mintellij.psi.MintComponent
+import com.github.bjansen.mintellij.psi.MintEnum
+import com.github.bjansen.mintellij.psi.MintFile
+import com.github.bjansen.mintellij.psi.MintModule
+import com.github.bjansen.mintellij.psi.MintPsiElement
+import com.github.bjansen.mintellij.psi.MintRecord
+import com.github.bjansen.mintellij.psi.MintStore
+import com.github.bjansen.mintellij.psi.firstChildMatchingAntlrRule
 import com.intellij.ide.projectView.PresentationData
-import com.intellij.ide.structureView.*
+import com.intellij.ide.structureView.StructureViewBuilder
+import com.intellij.ide.structureView.StructureViewModel
+import com.intellij.ide.structureView.StructureViewModelBase
+import com.intellij.ide.structureView.StructureViewTreeElement
+import com.intellij.ide.structureView.TreeBasedStructureViewBuilder
 import com.intellij.ide.util.treeView.smartTree.SortableTreeElement
 import com.intellij.ide.util.treeView.smartTree.Sorter
 import com.intellij.ide.util.treeView.smartTree.TreeElement
@@ -11,7 +22,10 @@ import com.intellij.lang.PsiStructureViewFactory
 import com.intellij.navigation.ItemPresentation
 import com.intellij.navigation.ItemPresentationProviders
 import com.intellij.openapi.editor.Editor
-import com.intellij.psi.*
+import com.intellij.psi.PsiElement
+import com.intellij.psi.PsiElementVisitor
+import com.intellij.psi.PsiFile
+import com.intellij.psi.PsiNameIdentifierOwner
 import com.intellij.util.containers.toArray
 
 class MintStructureViewFactory : PsiStructureViewFactory {
@@ -33,10 +47,10 @@ class MintStructureViewModel(psiFile: PsiFile) :
     override fun isAlwaysShowsPlus(element: StructureViewTreeElement?): Boolean {
         return false
     }
+
     override fun isAlwaysLeaf(element: StructureViewTreeElement?): Boolean {
         return false
     }
-
 }
 
 class MintStructureViewElement(val psiElement: MintPsiElement) : StructureViewTreeElement, SortableTreeElement {

@@ -5,13 +5,13 @@ import com.intellij.execution.configurations.ConfigurationType
 
 class MintRunConfigurationType : ConfigurationType {
 
-	override fun getDisplayName() = "Mint"
+    override fun getDisplayName() = "Mint"
 
-	override fun getConfigurationTypeDescription() = "Mint run configuration type"
+    override fun getConfigurationTypeDescription() = "Mint run configuration type"
 
-	override fun getIcon() = MintIcons.file
+    override fun getIcon() = MintIcons.file
 
-	override fun getId() = "MintRunConfiguration"
+    override fun getId() = "MintRunConfiguration"
 
-	override fun getConfigurationFactories() = arrayOf(MintRunConfigurationFactory(this))
+    override fun getConfigurationFactories() = arrayOf(MintRunConfigurationFactory(this))
 }

@@ -2,9 +2,10 @@ package com.github.bjansen.mintellij.runConfig;
 
 import com.intellij.openapi.options.SettingsEditor;
 import com.intellij.ui.RawCommandLineEditor;
+import javax.swing.JComboBox;
+import javax.swing.JComponent;
+import javax.swing.JPanel;
 import org.jetbrains.annotations.NotNull;
-
-import javax.swing.*;
 
 public class MintSettingsEditor extends SettingsEditor<MintRunConfiguration> {
 
