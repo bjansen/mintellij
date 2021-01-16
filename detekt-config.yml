@@ -9,7 +9,6 @@ formatting:
   Indentation:
     continuationIndentSize: 8
   ParameterListWrapping:
-    indentSize: 8
-    active: false
+    indentSize: 4
   MaximumLineLength:
     maxLineLength: 140

@@ -4,6 +4,7 @@ import com.intellij.codeInsight.completion.CompletionType
 import com.intellij.testFramework.fixtures.LightPlatformCodeInsightFixture4TestCase
 import org.junit.Test
 
+/* ktlint-disable parameter-list-wrapping */
 class MintCompletionContributorTest : LightPlatformCodeInsightFixture4TestCase() {
 
     override fun getTestDataPath() = "src/test/resources/completion"

@@ -94,9 +94,11 @@ tasks {
                 into(parserPackagePath)
                 include("Mint*")
             }
-            delete(fileTree(outputDirectory.canonicalPath) {
-                include("Mint*")
-            })
+            delete(
+                fileTree(outputDirectory.canonicalPath) {
+                    include("Mint*")
+                }
+            )
         }
     }
 
