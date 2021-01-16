@@ -1,0 +1,113 @@
+{
+  "title": "JSON schema for Mint lang configuration files",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source-directories": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "test-directories": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "application": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "head": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "meta": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "properties": {
+            "keywords": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "name": {
+          "type": "string"
+        },
+        "theme-color": {
+          "type": "string"
+        },
+        "orientation": {
+          "type": "string"
+        },
+        "display": {
+          "type": "string"
+        },
+        "icon": {
+          "type": "string"
+        },
+        "css-prefix": {
+          "type": ["string", "null"]
+        }
+      }
+    },
+    "dependencies": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "repository": {
+            "type": "string"
+          },
+          "constraint": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "formatter": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "indent-size": {
+          "type": "integer",
+          "default": 2
+        }
+      }
+    },
+    "external": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "javascripts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "stylesheets": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

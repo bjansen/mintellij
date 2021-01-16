@@ -36,6 +36,10 @@
 		<completion.contributor language="Mint" implementationClass="com.github.bjansen.mintellij.completion.MintCompletionContributor"/>
 	</extensions>
 
+    <extensions defaultExtensionNs="JavaScript">
+        <JsonSchema.ProviderFactory implementation="com.github.bjansen.mintellij.json.MinJsonSchemaProviderFactory"/>
+    </extensions>
+
 	<actions>
 		<!-- Add your actions here -->
 	</actions>
