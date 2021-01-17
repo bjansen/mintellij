@@ -1,4 +1,4 @@
-# Mint plugin for IntelliJ
+# Mint plugin for IntelliJ [![Current version](https://img.shields.io/jetbrains/plugin/v/15852?label=Version&style=flat-square)](https://plugins.jetbrains.com/plugin/15852-mint/versions) [![Build](https://img.shields.io/github/workflow/status/bjansen/mintellij/Build/main?label=Build&style=flat-square)](https://github.com/bjansen/mintellij/actions)
 
 <!-- Plugin description -->
 This plugin adds support for the [Mint language](https://www.mint-lang.com/) to IntelliJ-based IDEs.
