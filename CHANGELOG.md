@@ -14,7 +14,8 @@
 ### Fixed
 
 ### Security
-## [unspecified]
+
+## 0.1.0
 ### Added
 - syntax highlighting with configurable colors
 - run `mint` commands
