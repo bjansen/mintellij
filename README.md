@@ -13,8 +13,11 @@ This plugin adds support for the [Mint language](https://www.mint-lang.com/) to 
 **Working**:
 * configurable syntax highlighting
 * most of the syntax is accepted by the parser
+* Go To declaration (records, stores, components etc)
+* run `mint` commands from the IDE
+* basic code completion
 
 **Coming next**:
 * improve parser to support missing constructs
-* detect Mint installation and run `mint` commands from the IDE
+* detect Mint installation, Mint project type
 * navigation, find occurrences
