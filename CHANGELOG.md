@@ -4,6 +4,18 @@
 
 ## [Unreleased]
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+## [unspecified]
+### Added
 - syntax highlighting with configurable colors
 - run `mint` commands
 - go to modules, components, records etc.
